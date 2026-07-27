@@ -7,7 +7,7 @@ $color-light: #BCA3A3;
 .sec-todo { 
     position: relative;
     max-width: 640px;
-    height: 100svh;
+    min-height: 100svh;
     margin: 0 auto;
     padding: 30px 20px;
     border-left: 1px dotted $color-light;
