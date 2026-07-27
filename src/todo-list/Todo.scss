@@ -1,0 +1,156 @@
+$base-font: "Pretendard","Inter", "Noto Sans KR", "Malgun Gothic", "맑은 고딕", sans-serif;
+$point-font: "Gugi", "Noto Sans KR", "Malgun Gothic", "맑은 고딕", sans-serif;
+$color-dark: #634C4C;
+$color-light: #BCA3A3;
+
+
+.sec-todo { 
+    position: relative;
+    max-width: 640px;
+    height: 100svh;
+    margin: 0 auto;
+    padding: 30px 20px;
+    border-left: 1px dotted $color-light;
+    border-right: 1px dotted $color-light;
+    background-color: #FFFDF9;
+    box-sizing: border-box;
+}
+.sec-todo * { 
+    color: #333;
+    line-height: 1.3; 
+    box-sizing: border-box;
+}
+.top-area { 
+    padding-bottom: 20px;
+    border-bottom: 1px solid $color-dark;
+
+    .top-inner {
+        position: relative;
+        display: flex;
+        justify-content: center;
+
+        .add-todo {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: url("../assets/icon_plus.svg") no-repeat center center/auto #F37D53;
+            transform: translateY(-50%);
+        }
+        .title {
+            font-family: 'RomanticGumi';
+            font-size: 26px;
+        }
+    }
+}
+.todo__list {
+    padding: 20px 0;
+}
+.todo__item {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid $color-dark;
+    background-color: #fff;
+
+    & + & {
+        margin-top: 10px;
+    }
+    .todo-chk {
+        appearance: none;
+    }
+    .todo-chk + .icon {
+        display: block;
+        width: 16px;
+        height: 16px;
+        border: 1px solid $color-light;
+        border-radius: 3px;
+    }
+    .todo-chk:checked + .icon {
+        background: url("../assets/icon_check.svg") no-repeat center center/10px;
+    }
+    textarea {
+        width: 100%;
+        max-height: 150px;
+        border: none;
+        font-size: 16px;
+        resize: none;
+
+        &:focus {
+            outline: 1px dashed $color-light;
+        }
+        &.checked{
+            text-decoration: line-through;
+        }
+    }
+    .btn-box {
+        display: flex;
+        flex-direction: column;
+        gap: 12px 0;
+        
+        button {
+            width: 20px; 
+            height: 20px;
+            border-radius: 5px;
+
+            &.btn-drag {
+                background: url("../assets/icon_drag.svg") no-repeat center center/auto;
+            }
+            &.btn-delete {
+                background: url("../assets/icon_delete.svg") no-repeat center center/auto;
+
+                &:hover {
+                    background-image: url("../assets/icon_delete_w.svg");
+                    background-color: #D25656;
+                }
+            }
+        }
+    }
+}
+.total-area {
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100% - 40px);
+    padding-top: 20px;
+    border-top: 1px solid $color-dark;
+    transform: translateX(-50%);
+
+    * {
+        font-family: $point-font;
+        color: #967B7B;
+        letter-spacing: -0.02em;
+    }
+
+    .goal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0px 13px;
+        padding: 4px 14px;
+        border: 1px solid $color-light;
+        border-radius: 20px;
+        background-color: #fff;
+
+        span {
+            position: relative;
+
+            &:not(:first-child)::before {
+                content: "";
+                position: absolute;
+                left: -7px;
+                top: 50%;
+                width: 1px;
+                height: 10px;
+                background-color: #967B7B;
+                transform: translateY(-50%);
+            }
+        }
+    }
+}
