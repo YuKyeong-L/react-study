@@ -29,10 +29,6 @@ function App() {
     ]);
   }
 
-  function handleDrag() {
-
-  }
-
   return (
     <>
       <header className="header"></header>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 
 function TodoList({ todos, setTodos }) {
 
@@ -30,26 +31,51 @@ function TodoList({ todos, setTodos }) {
         );
     }
 
+    function handleDragEnd(result) {
+        console.log(result);
+
+        if (!result.destination) return;
+
+        const TodosArr = [...todos];
+        const [movedItem] = TodosArr.splice(result.source.index, 1);
+        TodosArr.splice(result.destination.index, 0, movedItem);
+
+        setTodos(TodosArr);
+    }
+
     return (
-        <ul className="todo__list">
-            {todos.length === 0 ? (
-                <li>버튼을 눌러 할 일을 추가해주세요!</li>
-            ) : (
-                todos.map(todo => (
-                    <li className="todo__item" key={todo.id}>
-                        <label>
-                            <input type="checkbox" className="todo-chk hidden" name="check" checked={todo.done} onChange={(e) => handleCheck(todo.id, e.target.checked)} />
-                            <span className="icon"></span>
-                        </label>
-                        <textarea name="todoText" className={todo.done ? "checked" : ""} value={todo.text} onChange={(e) => handleChange(e, todo.id, e.target.value)}></textarea>
-                        <div className="btn-box">
-                            <button type="button" className="btn-drag"></button>
-                            <button type="button" className="btn-delete" onClick={() => handleDelete(todo.id)}></button>
-                        </div>
-                    </li>
-                ))
-            )}
-        </ul>
+        <DragDropContext onDragEnd={handleDragEnd}>
+            <Droppable droppableId="todo__list" direction="vertical">
+                {provided => (
+                    //provided -> drag 전달 객체
+                    <ul className="todo__list" {...provided.droppableProps} ref={provided.innerRef}>
+                        {todos.length === 0 ? (
+                            <li>버튼을 눌러 할 일을 추가해주세요!</li>
+                        ) : (
+                            todos.map((todo, index) => (
+                                //draggableId는 문자열(string)
+                                <Draggable draggableId={todo.id.toString()} index={index} key={todo.id}>
+                                    {provided => (
+                                        <li className="todo__item" ref={provided.innerRef}{...provided.draggableProps} style={{ ...provided.draggableProps.style, }} >
+                                            <label>
+                                                <input type="checkbox" className="todo-chk hidden" name="check" checked={todo.done} onChange={(e) => handleCheck(todo.id, e.target.checked)} />
+                                                <span className="icon"></span>
+                                            </label>
+                                            <textarea name="todoText" className={todo.done ? "checked" : ""} value={todo.text} onChange={(e) => handleChange(e, todo.id, e.target.value)}></textarea>
+                                            <div className="btn-box">
+                                                <div className="btn btn-drag" {...provided.dragHandleProps}></div>
+                                                <button type="button" className="btn btn-delete" onClick={() => handleDelete(todo.id)}></button>
+                                            </div>
+                                        </li>
+                                    )}
+                                </Draggable>
+                            ))
+                        )}
+                        {provided.placeholder}
+                    </ul>
+                )}
+            </Droppable>
+        </DragDropContext>
     );
 
 }
