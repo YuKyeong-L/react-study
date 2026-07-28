@@ -1,11 +1,10 @@
-import { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 
 function TodoList({ todos, setTodos }) {
 
     function handleChange(e, id, text) {
         e.target.style.height = "auto";
-        e.target.style.height = `${e.target.scrollHeight}px`;
+        e.target.style.height = `${e.target.scrollHeight + 1}px`;
 
         //todos 배열을 수정
         setTodos(todos =>
@@ -50,13 +49,13 @@ function TodoList({ todos, setTodos }) {
                     //provided -> drag 전달 객체
                     <ul className="todo__list" {...provided.droppableProps} ref={provided.innerRef}>
                         {todos.length === 0 ? (
-                            <li>버튼을 눌러 할 일을 추가해주세요!</li>
+                            <li class="info-text">[버튼을 눌러 할 일을 추가해주세요!]</li>
                         ) : (
                             todos.map((todo, index) => (
                                 //draggableId는 문자열(string)
                                 <Draggable draggableId={todo.id.toString()} index={index} key={todo.id}>
                                     {provided => (
-                                        <li className="todo__item" ref={provided.innerRef}{...provided.draggableProps} style={{ ...provided.draggableProps.style, }} >
+                                        <li className="todo__item" ref={provided.innerRef}{...provided.draggableProps} style={provided.draggableProps.style} >
                                             <label>
                                                 <input type="checkbox" className="todo-chk hidden" name="check" checked={todo.done} onChange={(e) => handleCheck(todo.id, e.target.checked)} />
                                                 <span className="icon"></span>

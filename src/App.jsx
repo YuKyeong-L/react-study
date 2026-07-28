@@ -1,17 +1,46 @@
 import { useState } from 'react'
+import { useEffect } from "react";
 //import './App.css'
 import './todo-list/Todo.scss'
 import TodoList from "./todo-list/Todo.jsx";
 
 function App() {
-  //날짜 정보
-  const today = new Date();
-  const month = today.getMonth() + 1;
-  const date = today.getDate();
-  const day = today.getDay();
+
+  const [now, setToday] = useState(new Date()); //날짜의 초기값
+  const month = now.getMonth() + 1;
+  const date = now.getDate();
+  const day = now.getDay();
   const dayText = ['Sun', 'Mon', 'Tues', 'Weds', 'Thur', 'Fri', 'Sat'];
 
-  const [todos, setTodos] = useState([]);
+  useEffect(() => {
+    //날짜 정보
+    const tomorrow = new Date(now);
+
+    tomorrow.setDate(tomorrow.getDate() + 1); //날짜 변경
+    tomorrow.setHours(0, 0, 0, 0); // 00:00
+    const timeout = tomorrow - now;
+
+    const timer = setTimeout(() => {
+      //자정이 되면 useState 상태를 변경
+      setToday(new Date());
+    }, timeout);
+
+    //타이머 정리
+    return function () {
+      clearTimeout(timer);
+    }
+  }, [now])
+
+  const [todos, setTodos] = useState(() => {
+    const savedData = localStorage.getItem("todos");
+
+    //갹체 생성
+    return savedData ? JSON.parse(savedData) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   const doneCount = todos.filter(todo => todo.done).length;
   const donePercent = Math.round(doneCount / todos.length * 100);

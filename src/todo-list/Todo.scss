@@ -9,7 +9,7 @@ $color-light: #BCA3A3;
     max-width: 640px;
     min-height: 100svh;
     margin: 0 auto;
-    padding: 30px 20px 85px;
+    padding: 30px 20px 67px;
     border-left: 1px dotted $color-light;
     border-right: 1px dotted $color-light;
     background-color: #FFFDF9;
@@ -21,7 +21,7 @@ $color-light: #BCA3A3;
     box-sizing: border-box;
 }
 .top-area { 
-    padding-bottom: 20px;
+    padding-bottom: 15px;
     border-bottom: 1px solid $color-dark;
 
     .top-inner {
@@ -38,6 +38,7 @@ $color-light: #BCA3A3;
             border-radius: 50%;
             background: url("../assets/icon_plus.svg") no-repeat center center/auto #F37D53;
             transform: translateY(-50%);
+            cursor: pointer;
         }
         .title {
             font-family: 'RomanticGumi';
@@ -50,6 +51,7 @@ $color-light: #BCA3A3;
 }
 .todo__item {
     display: flex;
+    align-items: flex-start;
     gap: 12px;
     padding: 12px;
     border-radius: 10px;
@@ -64,13 +66,13 @@ $color-light: #BCA3A3;
     }
     .todo-chk + .icon {
         display: block;
-        width: 16px;
-        height: 16px;
+        width: 18px;
+        height: 18px;
         border: 1px solid $color-light;
         border-radius: 3px;
     }
     .todo-chk:checked + .icon {
-        background: url("../assets/icon_check.svg") no-repeat center center/10px;
+        background: url("../assets/icon_check.svg") no-repeat center center/12px;
     }
     textarea {
         width: 100%;
@@ -89,12 +91,13 @@ $color-light: #BCA3A3;
     .btn-box {
         display: flex;
         flex-direction: column;
-        gap: 12px 0;
+        gap: 6px 0;
         
         .btn {
-            width: 20px; 
-            height: 20px;
+            width: 22px; 
+            height: 22px;
             border-radius: 5px;
+            cursor: pointer;
 
             &.btn-drag {
                 background: url("../assets/icon_drag.svg") no-repeat center center/auto;
@@ -110,15 +113,19 @@ $color-light: #BCA3A3;
         }
     }
 }
+.info-text {
+    font-size: 16px;
+    color: #999;
+}
 .total-area {
     position: absolute;
     left: 50%;
-    bottom: 30px;
+    bottom: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: calc(100% - 40px);
-    padding-top: 20px;
+    padding-top: 15px;
     border-top: 1px solid $color-dark;
     transform: translateX(-50%);
 
