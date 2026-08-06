@@ -5,11 +5,12 @@ function TodoList({ todos, setTodos }) {
     function handleChange(e, id, text) {
         e.target.style.height = "auto";
         e.target.style.height = `${e.target.scrollHeight + 1}px`;
+        const textH = `${e.target.scrollHeight + 1}px`;
 
         //todos 배열을 수정
         setTodos(todos =>
             todos.map(todo => todo.id === id ?
-                { ...todo, text } : todo
+                { ...todo, text, areaH: textH } : todo
             )
         );
 
@@ -31,7 +32,6 @@ function TodoList({ todos, setTodos }) {
     }
 
     function handleDragEnd(result) {
-        console.log(result);
 
         if (!result.destination) return;
 
@@ -60,7 +60,7 @@ function TodoList({ todos, setTodos }) {
                                                 <input type="checkbox" className="todo-chk hidden" name="check" checked={todo.done} onChange={(e) => handleCheck(todo.id, e.target.checked)} />
                                                 <span className="icon"></span>
                                             </label>
-                                            <textarea name="todoText" className={todo.done ? "checked" : ""} value={todo.text} onChange={(e) => handleChange(e, todo.id, e.target.value)}></textarea>
+                                            <textarea name="todoText" className={todo.done ? "checked" : ""} value={todo.text} onChange={(e) => handleChange(e, todo.id, e.target.value)} style={{ height: todo.areaH }}></textarea>
                                             <div className="btn-box">
                                                 <div className="btn btn-drag" {...provided.dragHandleProps}></div>
                                                 <button type="button" className="btn btn-delete" onClick={() => handleDelete(todo.id)}></button>

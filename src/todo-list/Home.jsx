@@ -53,6 +53,7 @@ function Home() {
                 id: Date.now(),
                 text: "",
                 done: false,
+                areaH: "",
             }
         ]);
     }
