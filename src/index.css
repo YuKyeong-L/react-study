@@ -9,6 +9,25 @@
   font-weight: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: 'SchoolSafetyEraser';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimJiugaeR.woff2') format('woff2');
+  font-weight: normal;
+  font-display: swap;
+}
+
+@import "tailwindcss";
+
+@theme {
+  --font-SSE: "SchoolSafetyEraser", sans-serif;
+}
+@utility container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  background-color: #F4FBDC;
+}
+
 
 :root {
   --text: #6b6375;
@@ -62,9 +81,6 @@
   }
 }
 
-*{
-  font-family: "Pretendard","Inter", "Noto Sans KR", "Malgun Gothic", "맑은 고딕", sans-serif;
-}
 body {
   overscroll-behavior: contain;
 }

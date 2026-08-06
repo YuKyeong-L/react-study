@@ -3,7 +3,9 @@ $point-font: "Gugi", "Noto Sans KR", "Malgun Gothic", "맑은 고딕", sans-seri
 $color-dark: #634C4C;
 $color-light: #BCA3A3;
 
-
+.main{
+    font-family: "Pretendard","Inter", "Noto Sans KR", "Malgun Gothic", "맑은 고딕", sans-serif;
+}
 .sec-todo { 
     position: relative;
     max-width: 640px;
